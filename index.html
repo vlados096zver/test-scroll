@@ -164,6 +164,21 @@
     allowDropdown: true,
         autoHideDialCode: false,
         separateDialCode: true,
+        useFullscreenPopup: false
 });
+
+ // Наблюдатель за изменениями в DOM
+const observer = new MutationObserver((mutationsList) => {
+    for (const mutation of mutationsList) {
+        // Проверяем, если изменяется класс на открытие списка
+        if (mutation.type === 'attributes' && mutation.target.classList.contains('iti__country-list') && mutation.target.style.display !== 'none') {
+            console.log('Список стран открыт!');
+        }
+    }
+});
+
+// Настроим наблюдатель для отслеживания изменений классов и стилей на элементе
+// Настроим наблюдатель для отслеживания изменений классов и стилей на элементе
+observer.observe(document.querySelector('.iti__country-list'), { attributes: true, childList: false, subtree: false });
 
 </script>
